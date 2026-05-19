@@ -1,0 +1,1 @@
+Permuter deux nombres a et b
