@@ -4,6 +4,9 @@ def inverse(a: int) -> float:
     return 1/a
 
 def secondstodayshoursminutesseconds(time: int) -> tuple[int, int, int, int]:
+    """division entière par rapport aux unités "du dessous" et reste par rapport aux
+    unités "du dessus".
+    """
     days = time // (60*60*24)
     hours = time // (60*60) % 24
     minutes = time // 60 % 60 % 24
