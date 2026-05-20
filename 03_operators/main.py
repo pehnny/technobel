@@ -1,7 +1,8 @@
-def inverse(a: int) -> float:
-    if a == 0:
-        return 0
-    return 1/a
+def inverse(a: int, b: int) -> tuple[int, int]:
+    a = a + b
+    b = a - b
+    a = a - b
+    return a, b
 
 def secondstodayshoursminutesseconds(time: int) -> tuple[int, int, int, int]:
     """division entière par rapport aux unités "du dessous" et reste par rapport aux
@@ -35,6 +36,8 @@ def main() -> None:
     print(not (a*b) > 100)
     print(b == 15 or (c > 60 and a < 5))
     print((b == 15 or (c > 60 and a < 5) and a < b) or not (b == 9))
+
+    a, b = inverse(a, b)
 
     days, hours, minutes, seconds = secondstodayshoursminutesseconds(4561)
     print(f"days: {days}, hours: {hours}, minutes: {minutes}, seconds: {seconds}")
