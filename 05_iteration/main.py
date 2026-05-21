@@ -97,7 +97,7 @@ def main() -> None:
             print("Bonjour adulte")
         case False:
             print("Au revoir enfant")
-    
+            
     guess_game()
 
     printc("Toute la vie des sociétés dans lesquelles règnent les conditions modernes de production s'annonce comme une immense accumulation de spectacles.")
