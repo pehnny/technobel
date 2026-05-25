@@ -1,13 +1,15 @@
-from typing import Optional, Protocol
+from typing import Optional, Protocol, Self
 
 class Comparable(Protocol):
-    def __lt__(self, other: object) -> bool: ...
-    def __gt__(self, other: object) -> bool: ...
+    def __lt__(self, other: Self, /) -> bool: ...
+    def __gt__(self, other: Self, /) -> bool: ...
 
-# The point of binary_search is that it makes looking
-# for an item O(log(n)) instead of O(n).
-# The trade of is the list has to be sorted.
 def binary_search[T: Comparable](arr: list[T], item: T) -> Optional[int]:
+    """The point of binary_search is that it makes looking
+    for an item `O(log(n))` instead of `O(n)`.
+
+    The trade of is the list has to be sorted.
+    """
     low = 0
     high = len(arr) - 1
 
