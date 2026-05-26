@@ -16,4 +16,4 @@ def pgcd(a: int, b: int) -> int:
     if not remainder:
         return small
         
-    return pgcd(remainder, large)
+    return pgcd(remainder, small)
