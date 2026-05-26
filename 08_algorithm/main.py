@@ -8,8 +8,6 @@ from recursion.recursive_count import recursive_count
 from recursion.recursive_max import recursive_max
 from recursion.recursive_binary_search import recursive_binary_search
 
-
-
 def main() -> None:
     # binary_search
     size = 32
