@@ -7,6 +7,7 @@ from recursion.recursive_sum import recursive_sum
 from recursion.recursive_count import recursive_count
 from recursion.recursive_max import recursive_max
 from recursion.recursive_binary_search import recursive_binary_search
+from searching.breadth_first_search import breadth_first_search, is_person_seller, network
 
 def main() -> None:
     # binary_search
@@ -54,6 +55,9 @@ def main() -> None:
     value = random.randint(0, size-1)
     print(value, arr)
     print(recursive_binary_search(arr, value))
+
+    # breadth_first_search
+    print(breadth_first_search(network, "you", is_person_seller))
     return
 
 if __name__ == "__main__":
