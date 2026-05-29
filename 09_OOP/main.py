@@ -4,12 +4,15 @@ from package.Pilot import Pilot
 from package.Race import Race
 
 def main() -> None:
-    michel, mike = Pilot("Michel"), Pilot("Mike")
-    michel_car = Car(120, 350, "Fiat", "Punto", michel)
-    mike_car = Car(110, 365, "Renault", "Clio", mike)
+    michel, mike, rene = Pilot("Michel"), Pilot("Mike"), Pilot("René")
+    cars = [
+        Car(120, 350, "Fiat", "Punto", michel),
+        Car(110, 365, "Renault", "Clio", mike),
+        Car(60, 420, "Audi", "R8", rene)
+    ]
 
     circuit = Circuit(15)
-    race = Race(5, michel_car, mike_car, circuit)
+    race = Race(5, cars, circuit)
     race.run()
     
     winner = race.get_winner()

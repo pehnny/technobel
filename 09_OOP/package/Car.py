@@ -5,7 +5,7 @@ class Car:
     def __init__(self, min_speed: float, max_speed: float, model: str, brand: str, pilot: Pilot):
         self.min_speed = min_speed
         self.max_speed = max_speed
-        self.speed = min_speed
+        self.speed = 0
         self.time = 0
         self.model = model
         self.brand = brand
