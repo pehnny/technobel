@@ -15,4 +15,6 @@ class Car:
         self.speed = random.randint(self.min_speed, self.max_speed)
 
     def add_time(self, distance: float):
+        time = distance / self.speed
         self.time += distance / self.speed
+        return round(time * 3600, 2)

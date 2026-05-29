@@ -1,3 +1,5 @@
+import threading
+from time import sleep
 from package.Circuit import Circuit
 from package.Car import Car
 
@@ -8,14 +10,25 @@ class Race:
         self.car2 = car2
         self.circuit = circuit
         self.done = False
+
+    def run_turn(self, car: Car, turn: int) -> None:
+        for _ in range(turn):
+            car.change_speed()
+            time = car.add_time(self.circuit.distance)
+            print(f"{car.pilot.name} performes {time} seconds")
+            sleep(0.5)
+        return
     
-    def run(self):
+    def run(self) -> None:
         distance = self.circuit.distance
-        for i in range(self.turn):
-            self.car1.change_speed()
-            self.car2.change_speed()
-            self.car1.add_time(distance)
-            self.car2.add_time(distance)
+        cars = [self.car1, self.car2]
+        threads: list[threading.Thread] = []
+        for car in cars:
+            threads.append(threading.Thread(target=self.run_turn, args=(car, self.turn)))
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
         self.done = True
         return
     

@@ -15,7 +15,6 @@ def main() -> None:
     winner = race.get_winner()
     if winner:
         print(f"{winner.pilot.name} won the race with his {winner.model} {winner.brand}.")
-
     pass
 
 if __name__ == "__main__":
