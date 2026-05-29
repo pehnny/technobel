@@ -9,11 +9,11 @@ class Race:
         self.circuit = circuit
         self.done = False
     
-    def race(self):
+    def run(self):
         distance = self.circuit.distance
         for i in range(self.turn):
-            self.car1.speed()
-            self.car2.speed()
+            self.car1.change_speed()
+            self.car2.change_speed()
             self.car1.add_time(distance)
             self.car2.add_time(distance)
         self.done = True

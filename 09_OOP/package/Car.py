@@ -1,20 +1,17 @@
 import random
+from package.Pilot import Pilot
 
 class Car:
-    def __init__(self, min_speed: float, max_speed: float, model: str, brand: str):
+    def __init__(self, min_speed: float, max_speed: float, model: str, brand: str, pilot: Pilot):
         self.min_speed = min_speed
         self.max_speed = max_speed
-        self.speed = self.speed()
+        self.speed = min_speed
         self.time = 0
         self.model = model
         self.brand = brand
-
-    @property
-    def speed(self) -> float:
-        return self.speed
+        self.pilot = pilot
     
-    @property.setter
-    def speed(self):
+    def change_speed(self):
         self.speed = random.randint(self.min_speed, self.max_speed)
 
     def add_time(self, distance: float):
