@@ -10,7 +10,7 @@ class Race:
         self.circuit = circuit
         self.done = False
 
-    def run_turn(self, car: Car, turn: int) -> None:
+    def _run_lap(self, car: Car, turn: int) -> None:
         for _ in range(turn):
             car.change_speed()
             time = car.add_time(self.circuit.distance)
@@ -21,7 +21,7 @@ class Race:
     def run(self) -> None:
         threads: list[threading.Thread] = []
         for car in self.cars:
-            threads.append(threading.Thread(target=self.run_turn, args=(car, self.turn)))
+            threads.append(threading.Thread(target=self._run_lap, args=(car, self.turn)))
         for thread in threads:
             thread.start()
         for thread in threads:
