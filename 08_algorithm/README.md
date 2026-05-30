@@ -4,7 +4,7 @@
 
 Imagine que tu cherches un mot dans un dictionnaire. Tu ne commences pas à la première page — tu ouvres le livre à peu près au milieu, tu regardes où tu en es, et tu décides d'aller à gauche ou à droite. Tu répètes jusqu'à trouver le mot. C'est exactement ça, la **recherche binaire**.
 
-La recherche binaire est un algorithme qui permet de retrouver un élément dans une **liste triée** en divisant l'espace de recherche par deux à chaque étape. Elle est l'un des algorithmes fondamentaux de l'informatique et sert de base à une grande partie des structures de données plus avancées.
+La recherche binaire est un algorithme qui permet de retrouver un élément dans une **liste triée** en divisant l'espace de recherche par deunx à chaque étape. Elle est l'un des algorithmes fondamentaux de l'informatique et sert de base à une grande partie des structures de données plus avancées.
 
 ### Condition indispensable
 
@@ -153,3 +153,143 @@ search_matrix(matrix, 13)  # False
 - Comment se comporte la recherche binaire sur une liste d'un seul élément ? Sur une liste vide ?
 - Que se passe-t-il si la liste n'est pas triée ? Est-ce que l'algorithme échoue toujours, ou peut-il parfois retourner le bon résultat par hasard ?
 - En Python, le module `bisect` de la bibliothèque standard implémente une recherche binaire. Explore `bisect_left` et `bisect_right`.
+
+---
+
+## Récursion
+
+Une fonction récursive se définit en termes d'elle-même. Elle doit toujours avoir :
+
+1. Un **cas de base** — condition d'arrêt, retourne un résultat direct.
+2. Un **cas récursif** — appel sur une entrée strictement plus petite.
+
+### Exemples du dossier
+
+**Factorielle** — `n! = n × (n−1)!`
+
+```python
+def factorial(n: int) -> int:
+    if n == 0:            # cas de base
+        return 1
+    return n * factorial(n - 1)   # cas récursif
+```
+
+**PGCD** — algorithme d'Euclide (diviser pour régner)
+
+```python
+def pgcd(a: int, b: int) -> int:
+    if b == 0:
+        return a
+    return pgcd(b, a % b)
+```
+
+**Maximum récursif** — diviser pour régner sur une liste
+
+```python
+def recursive_max(lst: list) -> int:
+    if len(lst) == 1:
+        return lst[0]
+    sub_max = recursive_max(lst[1:])
+    return lst[0] if lst[0] > sub_max else sub_max
+```
+
+### Récursion vs itération
+
+| Critère    | Récursion                                  | Itération                |
+|------------|--------------------------------------------|--------------------------|
+| Lisibilité | Proche de la définition mathématique       | Plus verbeux mais explicite |
+| Mémoire    | Empile des appels (risque `RecursionError`) | Mémoire constante        |
+| Performance| Surcoût des appels de fonction             | Généralement plus rapide |
+
+La pile Python est limitée à ~1 000 niveaux par défaut (`sys.getrecursionlimit()`).
+
+---
+
+## Parcours en largeur (BFS)
+
+Explorer un **graphe** (ou un arbre) niveau par niveau — tous les voisins directs avant d'aller plus loin.
+
+### Structure de données
+
+BFS utilise une **file** (*queue*) FIFO : on enfile les voisins à découvrir et on les défile dans l'ordre d'arrivée.
+
+```python
+from collections import deque
+
+def bfs(graph: dict, start):
+    visited = set()
+    queue   = deque([start])
+    visited.add(start)
+
+    while queue:
+        node = queue.popleft()            # défile
+        print(node)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)    # enfile
+```
+
+### Cas d'usage
+
+- Plus court chemin dans un graphe **non pondéré**.
+- Vérifier si deux nœuds sont **connectés**.
+- Explorer un arbre de façon exhaustive.
+
+### Complexité
+
+O(V + E) — V sommets, E arêtes.
+
+---
+
+## Tri par sélection
+
+Trouver le minimum de la partie non triée et le placer en tête, répéter.
+
+- Complexité : **O(n²)** dans tous les cas.
+- Simple mais inefficace sur les grandes listes.
+
+```python
+def selection_sort(lst: list) -> list:
+    for i in range(len(lst)):
+        min_idx = i
+        for j in range(i + 1, len(lst)):
+            if lst[j] < lst[min_idx]:
+                min_idx = j
+        lst[i], lst[min_idx] = lst[min_idx], lst[i]
+    return lst
+```
+
+---
+
+## Tri rapide (Quick Sort)
+
+Choisir un **pivot**, placer les éléments inférieurs à gauche et supérieurs à droite, puis trier récursivement chaque côté.
+
+- Complexité moyenne : **O(n log n)**.
+- Pire cas (pivot toujours min ou max) : O(n²) → atténué par un pivot **aléatoire**.
+
+```python
+import random
+
+def quick_sort(lst: list) -> list:
+    if len(lst) <= 1:
+        return lst
+    pivot  = random.choice(lst)
+    left   = [x for x in lst if x < pivot]
+    middle = [x for x in lst if x == pivot]
+    right  = [x for x in lst if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+```
+
+---
+
+## Récapitulatif des complexités
+
+| Algorithme          | Meilleur cas | Cas moyen  | Pire cas   |
+|---------------------|:------------:|:----------:|:----------:|
+| Recherche linéaire  | O(1)         | O(n)       | O(n)       |
+| Recherche binaire   | O(1)         | O(log n)   | O(log n)   |
+| BFS                 | O(1)         | O(V + E)   | O(V + E)   |
+| Tri par sélection   | O(n²)        | O(n²)      | O(n²)      |
+| Tri rapide          | O(n log n)   | O(n log n) | O(n²)      |

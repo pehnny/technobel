@@ -1,9 +1,60 @@
-1. Demandez à l'utilisateur son prénom et son nom, puis affichez-les avec un séparateur personnalisé.
+# Entrées / Sorties
 
-2. Affichez un message sur plusieurs lignes avec une fin de ligne personnalisée pour chaque ligne.
+Lire des données au clavier et afficher des résultats avec mise en forme.
 
-3. Demandez à l'utilisateur deux mots et affichez-les sur la même ligne, sans espace entre eux.
+## Concepts abordés
 
-4. Demandez à l'utilisateur deux nombres et affichez leur somme avec une fin de ligne personnalisée.
+- `input()` — lecture au clavier
+- `print()` — affichage avec `sep` et `end`
+- Conversion de types (`int()`, `float()`, `str()`)
+- f-strings
 
-5. Affichez trois valeurs avec un séparateur personnalisé et une fin de ligne personnalisée.
+## À retenir
+
+### `input()`
+
+`input()` retourne toujours une **chaîne de caractères** (`str`), peu importe ce que l'utilisateur tape.
+
+```python
+name = input("Votre prénom : ")   # name est un str
+age  = int(input("Votre âge : ")) # conversion explicite en int
+```
+
+### `print()` — paramètres `sep` et `end`
+
+| Paramètre | Valeur par défaut | Rôle |
+|-----------|:-----------------:|------|
+| `sep`     | `" "` (espace)    | Séparateur entre les arguments |
+| `end`     | `"\n"` (saut de ligne) | Caractère(s) après le dernier argument |
+
+```python
+print("Alice", "Bob", "Charlie")              # Alice Bob Charlie
+print("Alice", "Bob", "Charlie", sep=", ")   # Alice, Bob, Charlie
+print("Chargement", end="")                   # pas de saut de ligne
+print("... OK")                               # Chargement... OK
+```
+
+### f-strings
+
+```python
+prenom = "Alice"
+age = 30
+print(f"Bonjour {prenom}, tu as {age} ans.")
+# Bonjour Alice, tu as 30 ans.
+```
+
+### Conversion de type
+
+```python
+n = int("42")       # str → int
+x = float("3.14")   # str → float
+s = str(100)        # int → str
+```
+
+## Exercices du dossier
+
+1. Afficher prénom et nom avec un séparateur personnalisé.
+2. Afficher un message multi-lignes avec fin de ligne custom.
+3. Concaténer deux mots sans espace entre eux.
+4. Additionner deux nombres saisis au clavier.
+5. Afficher trois valeurs avec séparateur et fin de ligne personnalisés.
