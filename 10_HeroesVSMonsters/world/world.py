@@ -15,7 +15,9 @@ class World:
             for y in range(size)
         ]
         self.monsters: list[Character] = self._init_monsters()
+        self._set_monsters()
         self.hero: Character = hero
+        self.hero_location: tuple[int, int] = self._set_hero()
     
     def _init_monsters(self) -> list[Character]:
         keys = [monster.value for monster in MonsterClass]
@@ -51,14 +53,27 @@ class World:
             y_coord = [i for i in y_coord if i not in y_forbid]
         return
 
-    def _set_hero(self) -> None:
+    def _set_hero(self) -> tuple[int, int]:
         done = False
+        x = self._seed.choice(range(len(self.chunks[0])))
+        y = self._seed.choice(range(len(self.chunks)))
         while not done:
-            x = self._seed.choice(range(len(self.chunks[0])))
-            y = self._seed.choice(range(len(self.chunks)))
             if self.chunks[x][y].character == None:
                 self.chunks[x][y].goto(self.hero)
                 done = True
+            x = self._seed.choice(range(len(self.chunks[0])))
+            y = self._seed.choice(range(len(self.chunks)))
+        return (x, y)
+    
+    def reveal(self, coordinates: tuple[int, int]) -> None:
+        x, y = coordinates
+        x_range = [i for i in range(x-1, x+2) if 0 <= i < len(self.chunks[0])]
+        y_range = [i for i in range(y-1, y+2) if 0 <= i < len(self.chunks)]
+        
+        for i in x_range:
+            self.chunks[i][y].is_revealed = True
+        for j in y_range:
+            self.chunks[x][j].is_revealed = True
         return
 
     def move_hero(self, coordinates: tuple[int, int]) -> None:
@@ -68,6 +83,7 @@ class World:
         if not 0 <= y < len(self.chunks):
             raise IndexError("Out of map y axis.")
         try:
+            self.hero_location = coordinates
             self.chunks[x][y].goto(self.hero)
         except OccupiedError:
             raise OccupiedError()

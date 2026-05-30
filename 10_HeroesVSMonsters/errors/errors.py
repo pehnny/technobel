@@ -1,4 +1,13 @@
-class MonsterError(BaseException):
+class CharacterError(BaseException):
+    pass
+
+class HeroError(CharacterError):
+    pass
+
+class UnknownHeroClassError(HeroError):
+    pass
+
+class MonsterError(CharacterError):
     pass
 
 class MonsterClassError(MonsterError):

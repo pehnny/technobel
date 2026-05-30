@@ -6,7 +6,7 @@ class Chunk:
     def __init__(self, coordinates: tuple[int, int]):
         self.character: Optional[Character] = None
         self.coordinates: tuple[int, int] = coordinates
-        self.vitised = False
+        self.is_revealed = False
 
     def goto(self, character: Character) -> None:
         if self.character != None:

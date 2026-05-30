@@ -3,7 +3,7 @@ from characters.interfaces.hero import Hero
 from dices.dice import dice_six, dice_four
 
 class Human(Character, Hero):
-    def __init__(self, base_endurance: int, base_force: int):
+    def __init__(self):
         self._endurance = self._init_endurance()
         self._force = self._init_force()
         self.life = self._init_life()
