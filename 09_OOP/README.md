@@ -95,3 +95,11 @@ Race
 | `Car`     | Vitesse, calcul du temps par tour                   |
 | `Circuit` | Distance d'un tour                                  |
 | `Race`    | Orchestration : threads, boucle de tours, vainqueur |
+
+---
+
+## Solution
+
+[09_OOP/main.py](main.py)
+
+Le point d'entrée crée trois pilotes (`Pilot`) associés à trois voitures (`Car`) aux caractéristiques différentes — vitesse de départ, vitesse maximale, marque, modèle. Un circuit de 15 km (`Circuit(15)`) est construit, puis la course est lancée sur 5 tours (`Race(5, cars, circuit)`). Chaque voiture roule dans son propre thread ; à la fin, le vainqueur (temps total minimal) est déterminé avec `race.get_winner()` et affiché.

@@ -95,3 +95,61 @@ else:
 | Comparaison à des valeurs fixes connues | `match / case` |
 | Conditions avec intervalles ou expressions complexes | `if / elif / else` |
 | Destruction de structures (tuples, classes) | `match / case` |
+
+---
+
+## Exercices du dossier
+
+### Exercice 1 — Machine à café
+
+Écrivez une fonction `cafe(size, kind, sugar)` qui calcule le prix d'un café :
+
+| Paramètre | Valeur | Prix |
+|-----------|--------|:----:|
+| `size`    | `"small"` | 1.00 € |
+| `size`    | `"large"` | 1.50 € |
+| `kind`    | `"expresso"` | +0.50 € |
+| `kind`    | `"cappucino"` | +0.70 € |
+| `sugar`   | n sucres | +n × 0.10 € |
+
+Utilisez `match / case` pour chaque paramètre. La valeur par défaut doit être `cafe()` = `"small"` expresso avec 2 sucres.
+
+### Exercice 2 — Note numérique → lettre
+
+Convertissez une note entière (0–9) en mention littérale avec une cascade `if / elif` :
+
+| Note  | Mention |
+|:-----:|:-------:|
+| 0     | F       |
+| 1–2   | E       |
+| 3–4   | D       |
+| 5–6   | C       |
+| 7–8   | B       |
+| ≥ 9   | A       |
+
+### Exercice 3 — Jeu de devinette
+
+Tirez un entier aléatoire entre 0 et 10 avec `random.randint()`. Demandez à l'utilisateur de le deviner et retournez `True` s'il a trouvé, `False` sinon. Comparez avec `==` en pensant à convertir la saisie.
+
+### Exercice 4 — Calcul de l'IMC
+
+Écrivez `calcul_imc(taille: float, poids: float) -> str` selon la formule `imc = poids / taille²` :
+
+| IMC          | Catégorie  |
+|:------------:|:----------:|
+| < 18.5       | maigreur   |
+| 18.5 – 24.9  | idéal      |
+| 25.0 – 29.9  | surpoids   |
+| ≥ 30.0       | obésité    |
+
+Une cascade `if` suffit : dès qu'une condition est vraie, les suivantes ne sont pas évaluées.
+
+### Exercice 5 — Générateur de citations
+
+Proposez à l'utilisateur de choisir un auteur (`"Debord"` ou `"Hegel"`), puis affichez une citation aléatoire parmi celles stockées dans un dictionnaire. Gérez un auteur invalide avec `case _`.
+
+---
+
+### Solution
+
+[04_condition/main.py](main.py)

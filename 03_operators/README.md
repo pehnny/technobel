@@ -79,3 +79,62 @@ Retournent toujours `True` ou `False`.
 7. `or`
 
 En cas de doute, parenthèses `( )` toujours.
+
+---
+
+## Exercices du dossier
+
+### Exercice 1 — Évaluation d'expressions arithmétiques
+
+Calculez à la main les valeurs successives de `a` à `g`, puis vérifiez avec Python :
+
+```python
+a = 12
+b = 3*a + 8
+c = b - 2*a
+d = (c + 25) * b
+e = (a + b) % 10
+f = (c * d) // (b + 6)
+g = (d + e) // (f - 9)
+```
+
+### Exercice 2 — Évaluation d'expressions booléennes
+
+Avec `a = 13, b = 5, c = True`, évaluez chaque expression sans exécuter le code, puis vérifiez. La priorité des opérateurs (`and` avant `or`, `not` avant `and`) est souvent source d'erreurs.
+
+```python
+a > 10 and b < 20
+c != 40 or not c >= 100
+a == 2 and not b > 15
+(a < b and c > 30) or not c < 200
+```
+
+### Exercice 3 — Échange sans variable temporaire (arithmétique)
+
+Échangez les valeurs de deux entiers `a` et `b` en n'utilisant que les opérateurs `+` et `-`, sans aucune variable temporaire.
+
+**Principe :**
+```
+a = a + b   # a contient maintenant la somme
+b = a - b   # b = somme - b = ancienne valeur de a
+a = a - b   # a = somme - nouvelle valeur de b = ancienne valeur de b
+```
+
+### Exercice 4 — Conversion de secondes
+
+Écrivez une fonction qui convertit un nombre de secondes total en `(jours, heures, minutes, secondes)` à l'aide de `//` (division entière) et `%` (modulo).
+
+```
+4561 secondes → (0, 1, 16, 1)
+```
+
+| Unité    | Formule                      |
+|----------|------------------------------|
+| Jours    | `t // 86400`                 |
+| Heures   | `t // 3600 % 24`             |
+| Minutes  | `t // 60 % 60`               |
+| Secondes | `t % 60`                     |
+
+### Solution
+
+[03_operators/main.py](main.py)

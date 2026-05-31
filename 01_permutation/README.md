@@ -42,3 +42,19 @@ b = a   # b vaut déjà la nouvelle valeur de a !
 ```
 
 Toujours utiliser la forme `a, b = b, a` pour un échange sûr.
+
+---
+
+## Exercice du dossier
+
+Deux variables `a = 7` et `b = 5` sont initialisées. L'objectif est d'échanger leurs valeurs en une seule ligne, sans variable temporaire, puis d'afficher le résultat avant et après l'échange.
+
+Sortie attendue :
+```
+7 5
+5 7
+```
+
+### Solution
+
+[01_permutation/main.py](main.py)

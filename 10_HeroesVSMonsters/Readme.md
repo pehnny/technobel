@@ -189,3 +189,11 @@ def modifier(stat: int) -> int:
   - Suppression du monstre mort de la grille
   - Conditions de fin de partie (héros mort ou plus de monstres)
 - **`main.py`** — choix du type de héros, création du monde, lancement de la partie
+
+---
+
+## Lancer le jeu
+
+[10_HeroesVSMonsters/main.py](main.py)
+
+Le `main.py` est le point d'entrée du jeu. Dans son état actuel il est vide (`pass`) car la logique de jeu (`game/game.py`) reste à compléter (voir "À compléter" ci-dessus). Une fois finalisé, il devra : demander à l'utilisateur de choisir son type de héros (Humain ou Nain), instancier le monde, et lancer la boucle principale via `Game`.

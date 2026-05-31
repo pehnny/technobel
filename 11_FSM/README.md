@@ -54,3 +54,11 @@ Lire un nombre binaire de gauche à droite revient à construire sa valeur `v` d
 ```
 
 Le reste de `v_nouveau` ne dépend donc que du reste de `v_ancien`, jamais de la valeur entière accumulée. L'état courant encode ainsi exactement le reste modulo `n` du préfixe déjà lu, ce qui permet de travailler sur des nombres de taille arbitraire avec une mémoire constante (`n` états).
+
+---
+
+## Solution
+
+[11_FSM/main.py](main.py)
+
+Crée une machine modulo 5 (`BinaryFSM(5)`) et teste si une longue chaîne binaire représente un multiple de 5 via `fsm5.is_multiple(string)`. La méthode lit la chaîne bit par bit et applique à chaque étape `état = (2 × état + bit) % n` ; elle retourne `True` si l'état final est `0` (état acceptant).

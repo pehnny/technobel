@@ -113,3 +113,58 @@ Préférer la comprehension quand la logique tient en une ligne et reste lisible
 | `tuple`   | ✓       | ✗       | ✓        | ✓         |
 | `set`     | ✗       | ✓       | ✗        | ✗         |
 | `dict`    | ✓ (3.7+)| ✓       | clés: ✗  | par clé   |
+
+---
+
+## Exercices du dossier
+
+### Exercice 1 — Somme d'une liste aléatoire
+
+Générez 10 entiers aléatoires entre 1 et 100 dans une `list` et affichez leur somme avec `sum()`.
+
+### Exercice 2 — Tuple et séparateur
+
+Demandez le prénom et le nom à l'utilisateur, stockez-les dans un `tuple`, et affichez-les avec `print(*data, sep="\n")` (chaque élément sur sa propre ligne).
+
+### Exercice 3 — Intersection de deux ensembles
+
+Générez deux listes de 10 entiers aléatoires entre 1 et 20. Convertissez-les en `set` et utilisez `.intersection()` pour afficher les valeurs communes.
+
+### Exercice 4 — Dictionnaire de prix
+
+Définissez un `dict` `{fruit: prix}`. Proposez à l'utilisateur de choisir un fruit et affichez son prix avec `match / case`. Gérez l'absence de correspondance avec `case _`.
+
+### Exercice 5 — Maximum par clé (lambda)
+
+Étant donné une liste de tuples `(nom, âge)`, trouvez la personne la plus âgée en une ligne :
+```python
+oldest = max(data, key=lambda x: x[1])
+```
+
+### Exercice 6 — Filtrer les pairs
+
+Générez 10 entiers aléatoires entre 1 et 50. Utilisez `filter(lambda x: not x % 2, nombres)` pour ne garder que les nombres pairs.
+
+### Exercice 7 — Dédoublonnage
+
+Étant donné une liste de mots avec répétitions (ex. `["bonjour", "bonjour", "banane"]`), affichez les valeurs uniques en passant par `set(mots)`.
+
+### Exercice 8 — Dictionnaire de listes
+
+Définissez un `dict` associant chaque cours (`str`) à une liste d'étudiants (`list[str]`). Proposez un choix à l'utilisateur et affichez la liste correspondante.
+
+### Exercice 9 — Total de commande
+
+Étant donné une liste de tuples `(article, quantité)` et un dictionnaire `prix`, calculez le coût total en itérant avec `for marchandise, quantité in commandes`.
+
+### Exercice 10 — Statistiques salariales
+
+Étant donné une liste de dictionnaires `{"nom": ..., "salaire": ..., "département": ...}` :
+1. Calculez le salaire total et la moyenne globale avec `sum(map(lambda x: x["salaire"], entreprise))`.
+2. Pour chaque département (extrait avec `set(map(...))`), calculez la moyenne salariale en combinant `filter()` et `map()`.
+
+---
+
+### Solution
+
+[06_collection/main.py](main.py)

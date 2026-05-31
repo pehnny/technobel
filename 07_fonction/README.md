@@ -26,20 +26,19 @@ def nom_fonction(param1, param2):
 Annotations de type documentant les paramètres et le retour. Ignorées à l'exécution mais utiles pour la lisibilité et les outils d'analyse statique.
 
 ```python
-def calcul_moyenne(notes: list[float]) -> float:
-    if not notes:
-        return 0.0
-    return sum(notes) / len(notes)
+def aire_cercle(rayon: float) -> float:
+    import math
+    return math.pi * rayon ** 2
 ```
 
 ### Paramètres par défaut
 
 ```python
-def generer_email(prenom: str, nom: str, domaine: str = "gmail.com") -> str:
-    return f"{prenom.lower()}.{nom.lower()}@{domaine}"
+def creer_compte(nom: str, role: str = "utilisateur") -> str:
+    return f"{nom} ({role})"
 
-generer_email("alice", "dupont")               # alice.dupont@gmail.com
-generer_email("bob", "martin", "outlook.com")  # bob.martin@outlook.com
+creer_compte("Alice")            # "Alice (utilisateur)"
+creer_compte("Bob", "admin")     # "Bob (admin)"
 ```
 
 Les paramètres avec valeur par défaut doivent toujours être **après** les paramètres sans valeur par défaut.
@@ -47,12 +46,10 @@ Les paramètres avec valeur par défaut doivent toujours être **après** les pa
 ### Retour de plusieurs valeurs (tuple)
 
 ```python
-def nombres_pairs_impairs(lst: list[int]) -> tuple[list[int], list[int]]:
-    pairs   = [x for x in lst if x % 2 == 0]
-    impairs = [x for x in lst if x % 2 != 0]
-    return pairs, impairs
+def min_max(lst: list[int]) -> tuple[int, int]:
+    return min(lst), max(lst)
 
-p, i = nombres_pairs_impairs([1, 2, 3, 4, 5])
+petit, grand = min_max([4, 1, 9, 2])   # petit=1, grand=9
 ```
 
 ### List comprehension
@@ -82,15 +79,78 @@ print(x)     # 10
 
 Pour modifier une variable globale depuis une fonction, déclarer `global x` — à éviter en pratique.
 
-## Fonctions du dossier
+## Exercices du dossier
 
-| Fonction                    | Ce qu'elle illustre                              |
-|-----------------------------|--------------------------------------------------|
-| `calcul_moyenne()`          | Type hints, gestion cas limite (liste vide)      |
-| `recherche_min()`           | Itération manuelle sans fonction native          |
-| `generer_email()`           | Paramètre par défaut, formatage de chaîne        |
-| `compte_mots()`             | `str.split()`                                    |
-| `convertir_temperature()`   | Formule mathématique simple                      |
-| `nombres_pairs_impairs()`   | List comprehension, retour de tuple              |
-| `reverse()`                 | Slicing `[::-1]`                                 |
-| `valider_mot_de_passe()`    | Validation multi-critères, `any()`, `all()`      |
+### Exercice 1 — `calcul_moyenne(numbers: list[float]) -> float`
+
+Calculez la moyenne d'une liste de flottants. Gérez le cas limite de la liste vide en retournant `0` plutôt qu'une division par zéro.
+
+```python
+calcul_moyenne([1, 2, 3, 4, 5])  # → 3.0
+calcul_moyenne([])               # → 0
+```
+
+### Exercice 2 — `recherche_min(numbers: list[float]) -> float`
+
+Trouvez le minimum d'une liste **sans utiliser `min()`**. Initialisez avec le premier élément, puis parcourez et comparez.
+
+```python
+recherche_min([5, 3, 1, -1])  # → -1
+```
+
+### Exercice 3 — `generer_email(prenom, nom, domaine="gmail.com") -> str`
+
+Générez une adresse e-mail au format `prenom.nom@domaine` avec un domaine par défaut. Illustre les **paramètres par défaut** : le paramètre avec valeur doit être en dernier.
+
+```python
+generer_email("Friedrich", "Hegel")              # → "Friedrich.Hegel@gmail.com"
+generer_email("Karl", "Marx", "proton.me")        # → "Karl.Marx@proton.me"
+```
+
+### Exercice 4 — `compte_mots(text: str) -> int`
+
+Comptez le nombre de mots dans une chaîne en utilisant `str.split()` (qui découpe sur les espaces et ignore les espaces multiples).
+
+```python
+compte_mots("Bonjour le monde")  # → 3
+```
+
+### Exercice 5 — `convertir_temperature(celsius: float) -> float`
+
+Convertissez une température en Celsius en Fahrenheit avec la formule `F = 32 + (9/5) × C`.
+
+```python
+convertir_temperature(0)    # → 32.0
+convertir_temperature(100)  # → 212.0
+```
+
+### Exercice 6 — `nombres_pairs_impairs(nombres: list[int]) -> tuple[list[int], list[int]]`
+
+Séparez une liste d'entiers en deux sous-listes (pairs, impairs) en utilisant des **list comprehensions**. Retournez les deux listes dans un tuple.
+
+```python
+nombres_pairs_impairs([1, 2, 3, 4, 5, 6])  # → ([2, 4, 6], [1, 3, 5])
+```
+
+### Exercice 7 — `reverse(text: str) -> str`
+
+Inversez une chaîne de caractères en une seule expression grâce au **slicing** `[::-1]` (step = -1 = parcours de droite à gauche).
+
+```python
+reverse("bonjour")  # → "ruojnob"
+```
+
+### Exercice 8 — `valider_mot_de_passe(text: str) -> bool`
+
+Validez un mot de passe selon quatre critères : longueur ≥ 8, au moins une minuscule, une majuscule, un chiffre, un caractère spécial. Utilisez des flags booléens mis à jour dans une boucle `for`.
+
+```python
+valider_mot_de_passe("Techn0b€l")  # → True
+valider_mot_de_passe("faible")     # → False
+```
+
+---
+
+### Solution
+
+[07_fonction/main.py](main.py)

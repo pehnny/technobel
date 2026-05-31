@@ -53,8 +53,40 @@ s = str(100)        # int → str
 
 ## Exercices du dossier
 
-1. Afficher prénom et nom avec un séparateur personnalisé.
-2. Afficher un message multi-lignes avec fin de ligne custom.
-3. Concaténer deux mots sans espace entre eux.
-4. Additionner deux nombres saisis au clavier.
-5. Afficher trois valeurs avec séparateur et fin de ligne personnalisés.
+### Exercice 1 — Séparateur personnalisé
+
+Demandez le nom de famille puis le prénom à l'utilisateur, et affichez-les séparés par `*-*` en utilisant le paramètre `sep` de `print()`.
+
+```
+Bonjour *-* Dupont Alice
+```
+
+### Exercice 2 — Message long avec séparateur et fin de ligne custom
+
+Affichez une phrase dont chaque mot est un argument séparé de `print()`, avec `sep="$$\t"` (tabulation précédée de `$$`) et `end="$$\n"` comme terminateur.
+
+### Exercice 3 — Concaténation sans espace
+
+Demandez deux mots à l'utilisateur et affichez-les **collés** l'un à l'autre, sans aucun espace, en utilisant une f-string `f"{premier}{second}"`.
+
+### Exercice 4 — Addition de deux nombres saisis
+
+Lisez deux valeurs numériques au clavier. Attention : `input()` renvoie toujours un `str` — il faut convertir avant d'additionner. Affichez la somme avec `end="$$\n"`.
+
+```python
+# Attention aux cas limites : que faire si l'utilisateur saisit du texte ?
+```
+
+### Exercice 5 — Affichage multi-valeurs custom
+
+Affichez trois chaînes avec `sep="xXx"` et `end="**"`, sans saut de ligne final.
+
+```
+big brother xXx is watching xXx you**
+```
+
+---
+
+### Solution
+
+[02_input/main.py](main.py)
