@@ -31,7 +31,7 @@ def selection_sort[T: Comparable](arr: list[T], ascending: bool = True) -> list[
     copied_arr = arr.copy()
     func = _index_smallest if ascending else _index_greatest
     for _ in arr:
-            index = func(copied_arr)
-            new_arr.append(copied_arr.pop(index))
+        index = func(copied_arr)
+        new_arr.append(copied_arr.pop(index))
     return new_arr
 
