@@ -1,4 +1,4 @@
-from characters.playable.monster import Monster
+from playable import Monster
 
 class Orc(Monster):
     def __init__(self):

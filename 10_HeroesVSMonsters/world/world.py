@@ -1,12 +1,10 @@
 import random
-from characters.wolf import Wolf
-from characters.dragon import Dragon
-from characters.orc import Orc
+from characters import Wolf, Dragon, Orc
 from characters.playable.hero import Hero
 from characters.playable.monster import Monster
 from characters.enum.monster import MonsterClass
-from errors.errors import MonsterClassError, OccupiedError
-from world.chunk import Chunk
+from errors import MonsterClassError, OccupiedError
+from chunk import Chunk
 
 class World:
     def __init__(self, size: int, hero: Hero) -> None:

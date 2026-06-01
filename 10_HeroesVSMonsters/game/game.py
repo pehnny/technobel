@@ -1,10 +1,9 @@
-from world.world import World
+from world import World
 from characters.playable.hero import Hero
 from characters.enum.hero import HeroClass
-from characters.human import Human
+from characters import Human, Dwarf
 from characters.metaclass.character import Character
-from characters.dwarf import Dwarf
-from errors.errors import UnknownHeroClassError
+from errors import UnknownHeroClassError
 
 class Game:
     hero: Hero

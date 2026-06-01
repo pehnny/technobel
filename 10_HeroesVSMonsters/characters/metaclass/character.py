@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from dices.dice import dice_four, dice_six
+from dices import dice_four, dice_six
 
 class Character(ABC):
     _endurance: int

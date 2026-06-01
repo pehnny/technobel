@@ -1,6 +1,6 @@
 from characters.metaclass.character import Character
 from typing import Optional
-from errors.errors import OccupiedError
+from errors import OccupiedError
 
 class Chunk:
     def __init__(self, coordinates: tuple[int, int]):

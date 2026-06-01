@@ -1,4 +1,4 @@
-from characters.playable.hero import Hero
+from playable import Hero
 
 class Human(Hero):
     def __init__(self):

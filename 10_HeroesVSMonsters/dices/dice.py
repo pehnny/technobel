@@ -1,4 +1,3 @@
-from csv import Error
 import random
 
 class Dice:
@@ -14,7 +13,7 @@ class Dice:
     
     def n_best_roll(self, n: int, total: int) -> list[int]:
         if n > total:
-            raise Error(f"total must be grater or equal to n.")
+            raise ValueError(f"total must be grater or equal to n.")
         rolls = self.n_roll(total)
         rolls.sort()
         return rolls[:n]
