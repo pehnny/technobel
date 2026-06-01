@@ -1,8 +1,8 @@
 import random
-from package.Pilot import Pilot
+from race.Pilot import Pilot
 
 class Car:
-    def __init__(self, min_speed: float, max_speed: float, model: str, brand: str, pilot: Pilot):
+    def __init__(self, min_speed: int, max_speed: int, model: str, brand: str, pilot: Pilot):
         self.min_speed = min_speed
         self.max_speed = max_speed
         self.speed = 0

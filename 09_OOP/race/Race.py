@@ -1,7 +1,7 @@
 import threading
 from time import sleep
-from package.Circuit import Circuit
-from package.Car import Car
+from race.Circuit import Circuit
+from race.Car import Car
 
 class Race:
     def __init__(self, turn: int, cars: list[Car], circuit: Circuit):
