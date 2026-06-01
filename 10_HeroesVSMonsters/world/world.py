@@ -58,8 +58,8 @@ class World:
         x = self._seed.choice(range(len(self.chunks[0])))
         y = self._seed.choice(range(len(self.chunks)))
         while not done:
-            if self.chunks[x][y].character == None:
-                self.chunks[x][y].goto(self.hero)
+            if self.chunks[y][x].character == None:
+                self.chunks[y][x].goto(self.hero)
                 done = True
             x = self._seed.choice(range(len(self.chunks[0])))
             y = self._seed.choice(range(len(self.chunks)))
@@ -71,9 +71,9 @@ class World:
         y_range = [i for i in range(y-1, y+2) if 0 <= i < len(self.chunks)]
         
         for i in x_range:
-            self.chunks[i][y].is_revealed = True
+            self.chunks[y][i].is_revealed = True
         for j in y_range:
-            self.chunks[x][j].is_revealed = True
+            self.chunks[j][x].is_revealed = True
         return
 
     def move_hero(self, coordinates: tuple[int, int]) -> None:
@@ -84,7 +84,7 @@ class World:
             raise IndexError("Out of map y axis.")
         try:
             self.hero_location = coordinates
-            self.chunks[x][y].goto(self.hero)
+            self.chunks[y][x].goto(self.hero)
         except OccupiedError:
             raise OccupiedError()
         return
