@@ -12,6 +12,8 @@ class Chunk:
         if self.character != None:
             raise OccupiedError()
         self.character = character
+        return
 
     def leave(self) -> None:
         self.character = None
+        return

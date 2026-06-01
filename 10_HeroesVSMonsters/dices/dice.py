@@ -17,7 +17,7 @@ class Dice:
             raise Error(f"total must be grater or equal to n.")
         rolls = self.n_roll(total)
         rolls.sort()
-        return rolls[:-n]
+        return rolls[:n]
 
 dice_four = Dice(4)
 dice_six = Dice(6)

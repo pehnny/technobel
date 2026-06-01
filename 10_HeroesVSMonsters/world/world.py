@@ -2,89 +2,104 @@ import random
 from characters.wolf import Wolf
 from characters.dragon import Dragon
 from characters.orc import Orc
-from characters.metaclass.character import Character
+from characters.playable.hero import Hero
+from characters.playable.monster import Monster
 from characters.enum.monster import MonsterClass
 from errors.errors import MonsterClassError, OccupiedError
 from world.chunk import Chunk
 
 class World:
-    def __init__(self, size: int, hero: Character) -> None:
+    def __init__(self, size: int, hero: Hero) -> None:
         self._seed: random.Random = random.Random()
+        self.size = size
         self.chunks: list[list[Chunk]]  = [
             [Chunk((x, y)) for x in range(size)]
             for y in range(size)
         ]
-        self.monsters: list[Character] = self._init_monsters()
+        self.monsters: list[Monster] = self._init_monsters()
+        self.monsters_location: list[tuple[int, int]] = []
         self._set_monsters()
-        self.hero: Character = hero
+        self.hero: Hero = hero
         self.hero_location: tuple[int, int] = self._set_hero()
     
-    def _init_monsters(self) -> list[Character]:
+    def _init_monsters(self) -> list[Monster]:
         keys = [monster.value for monster in MonsterClass]
         choices = [self._seed.choice(keys) for _ in range(10)]
 
-        monsters: list[Character] = []
+        monsters: list[Monster] = []
         for monster in choices:
             match monster:
-                case MonsterClass.WOLF:
+                case MonsterClass.WOLF.value:
                     monsters.append(Wolf())
-                case MonsterClass.ORC:
+                case MonsterClass.ORC.value:
                     monsters.append(Orc())
-                case MonsterClass.DRAGON:
+                case MonsterClass.DRAGON.value:
                     monsters.append(Dragon())
                 case _:
                     raise MonsterClassError()
         return monsters
     
     def _set_monsters(self) -> None:
-        x_coord = list(range(len(self.chunks[0])))
-        y_coord = list(range(len(self.chunks)))
-        x_max = len(x_coord)
-        y_max = len(y_coord)
+        positions = [(x, y) for y in range(self.size) for x in range(self.size)]
 
         for monster in self.monsters:
-            x = self._seed.choice(x_coord)
-            y = self._seed.choice(y_coord)
-            self.chunks[x][y].goto(monster)
+            position = self._seed.choice(positions)
+            x, y = position
+            self.chunks[y][x].goto(monster)
+            self.monsters_location.append(position)
 
-            x_forbid = [i for i in range(x-1, x+2) if 0 <= i < x_max]
-            y_forbid = [i for i in range(y-1, y+2) if 0 <= i < y_max]
-            x_coord = [i for i in x_coord if i not in x_forbid]
-            y_coord = [i for i in y_coord if i not in y_forbid]
+            adjacents = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+            forbidden = [position]
+            for dx, dy in adjacents:
+                nx, ny = x+dx, y+dy
+                if 0 <= nx < self.size and 0 <= ny < self.size:
+                    forbidden.append((nx, ny))
+                    
+            positions = [position for position in positions if position not in forbidden]
         return
 
     def _set_hero(self) -> tuple[int, int]:
         done = False
-        x = self._seed.choice(range(len(self.chunks[0])))
-        y = self._seed.choice(range(len(self.chunks)))
+        x = self._seed.choice(range(self.size))
+        y = self._seed.choice(range(self.size))
         while not done:
-            if self.chunks[y][x].character == None:
-                self.chunks[y][x].goto(self.hero)
-                done = True
-            x = self._seed.choice(range(len(self.chunks[0])))
-            y = self._seed.choice(range(len(self.chunks)))
+            if self.chunks[y][x].character != None:
+                x = self._seed.choice(range(self.size))
+                y = self._seed.choice(range(self.size))
+                continue
+            self.chunks[y][x].goto(self.hero)
+            done = True
         return (x, y)
+    
+    def in_world(self, x: int, y: int) -> bool:
+        if 0 <= x < self.size and 0 <= y < self.size:
+            return True
+        return False
     
     def reveal(self, coordinates: tuple[int, int]) -> None:
         x, y = coordinates
-        x_range = [i for i in range(x-1, x+2) if 0 <= i < len(self.chunks[0])]
-        y_range = [i for i in range(y-1, y+2) if 0 <= i < len(self.chunks)]
-        
-        for i in x_range:
-            self.chunks[y][i].is_revealed = True
-        for j in y_range:
-            self.chunks[j][x].is_revealed = True
+        adjacents = [(1,0), (-1,0), (0,1), (0,-1)]
+        valid_neighbors = [(x, y)]
+        for dx, dy in adjacents:
+            nx, ny = x+dx, y+dy
+            if 0 <= nx < self.size and 0 <= ny < self.size:
+                valid_neighbors.append((nx, ny))
+
+        for x, y in valid_neighbors:
+            self.chunks[y][x].is_revealed = True
         return
 
-    def move_hero(self, coordinates: tuple[int, int]) -> None:
-        x, y = coordinates
-        if not 0 <= x < len(self.chunks[0]):
+    def move_hero(self, old_coordinates: tuple[int, int], new_coordinates: tuple[int, int]) -> None:
+        ox, oy = old_coordinates
+        nx, ny = new_coordinates
+        if not 0 <= nx < self.size:
             raise IndexError("Out of map x axis.")
-        if not 0 <= y < len(self.chunks):
+        if not 0 <= ny < self.size:
             raise IndexError("Out of map y axis.")
         try:
-            self.hero_location = coordinates
-            self.chunks[y][x].goto(self.hero)
+            self.hero_location = new_coordinates
+            self.chunks[ny][nx].goto(self.hero)
+            self.chunks[oy][ox].leave()
         except OccupiedError:
             raise OccupiedError()
         return
