@@ -1,6 +1,6 @@
 from enum import Enum
-from characters.enum.hero import HeroClass
-from characters.enum.monster import MonsterClass
+from hero import HeroClass
+from monster import MonsterClass
 
 _offset = len(HeroClass)
 

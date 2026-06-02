@@ -1,4 +1,4 @@
-from characters.metaclass.character import Character
+from characters.metaclass import Character
 from typing import Optional
 from errors import OccupiedError
 

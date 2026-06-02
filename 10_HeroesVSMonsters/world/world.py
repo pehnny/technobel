@@ -1,8 +1,7 @@
 import random
 from characters import Wolf, Dragon, Orc
-from characters.playable.hero import Hero
-from characters.playable.monster import Monster
-from characters.enum.monster import MonsterClass
+from characters.playable import Hero, Monster
+from characters.enum import MonsterClass
 from errors import MonsterClassError, OccupiedError
 from chunk import Chunk
 
