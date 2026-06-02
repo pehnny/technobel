@@ -3,7 +3,7 @@ from characters import Wolf, Dragon, Orc
 from characters.playable import Hero, Monster
 from characters.enum import MonsterClass
 from errors import MonsterClassError, OccupiedError
-from chunk import Chunk
+from .chunk import Chunk
 
 class World:
     def __init__(self, size: int, hero: Hero) -> None:

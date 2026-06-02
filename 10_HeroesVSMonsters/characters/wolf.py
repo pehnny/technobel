@@ -1,4 +1,4 @@
-from playable import Monster
+from .playable import Monster
 
 class Wolf(Monster):
     def __init__(self):

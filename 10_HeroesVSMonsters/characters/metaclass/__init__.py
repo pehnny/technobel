@@ -1,4 +1,4 @@
-from character import Character
+from .character import Character
 
 __all__ = [
     "Character"
