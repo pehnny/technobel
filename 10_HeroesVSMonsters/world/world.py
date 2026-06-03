@@ -9,7 +9,7 @@ class World:
     def __init__(self, size: int, hero: Hero) -> None:
         self._seed: random.Random = random.Random()
         self.size = size
-        self.chunks: list[list[Chunk]]  = [
+        self.chunks: list[list[Chunk]] = [
             [Chunk((x, y)) for x in range(size)]
             for y in range(size)
         ]
