@@ -1,0 +1,55 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+Table users {
+    id integer unique [primary key]
+    username varchar
+    email varchar
+    birth_date datetime
+}
+
+Table profiles {
+    id integer unique [primary key]
+    user_id integer
+    bio varchar
+    avatar varchar
+}
+
+Table games {
+    id integer unique [primary key]
+    title varchar
+    price float
+    release datetime
+    publisher_id integer
+}
+
+Table libraries {
+    user_id integer
+    game_id integer
+    purchase_date datetime
+    playtime int
+}
+
+Table publishers {
+    id integer unique [primary key]
+    name varchar
+}
+
+Table reviews {
+    user_id integer
+    game_id integer
+    rating integer
+    comment varchar
+    create_date datetime
+}
+
+Ref:  publishers.id < games.publisher_id
+
+Ref: users.id < libraries.user_id 
+
+Ref: games.id < libraries.game_id 
+
+Ref: users.id - reviews.user_id 
+
+Ref: games.id - reviews.game_id 
+
+Ref: users.id - profiles.user_id

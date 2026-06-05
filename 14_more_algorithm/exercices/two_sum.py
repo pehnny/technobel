@@ -7,7 +7,8 @@ def two_sum(array: list[int], target: int) -> tuple[int, int]:
         diff = target - value
         if diff in visited:
             return (visited[diff], i)
-        visited[value] = i
+        if value not in visited:
+            visited[value] = i
     return (-1, -1)
     # Greedy solution
     for i, value1 in enumerate(array[:-1]):
