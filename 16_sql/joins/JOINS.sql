@@ -92,7 +92,6 @@ SELECT
 FROM
     users
     LEFT JOIN user_games ON users.id = user_games.user_id
-    LEFT JOIN games ON user_games.game_id = games.id
 WHERE
     user_games.user_id IS NULL
 ORDER BY
@@ -310,12 +309,13 @@ LIMIT
     5;
 
 -- 6.1)
+-- N'est pas faisable sans sous requête
 SELECT
     games.title,
     publishers.name AS publisher,
     COUNT(user_games.user_id) AS owners,
-    SUM(user_games.hours_played) AS playtime,
-    AVG(reviews.rating) AS rating
+    SUM(DISTINCT user_games.hours_played) AS playtime,
+    AVG(DISTINCT reviews.rating) AS rating
 FROM
     games
     INNER JOIN publishers ON games.publisher_id = publishers.id
