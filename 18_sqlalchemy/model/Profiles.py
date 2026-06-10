@@ -14,3 +14,13 @@ class Profiles(Base):
     user: Mapped["Users"] = relationship(
         back_populates="profile"
     )
+
+    def __repr__(self) -> str:
+        representation = (
+            "Profiles("
+            f"id={self.id!r} " 
+            f"bio={self.bio!r} " 
+            f"user_id={self.user_id!r}"
+        )
+        representation += ")"
+        return representation

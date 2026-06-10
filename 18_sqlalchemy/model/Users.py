@@ -1,5 +1,6 @@
+from datetime import date
 from db import Base
-from sqlalchemy import String, Identity
+from sqlalchemy import String, Identity, Date, inspect
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 class Users(Base):
@@ -9,10 +10,24 @@ class Users(Base):
     username: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     email: Mapped[str] = mapped_column(String(50), unique=True, nullable=True)
     country: Mapped[str] = mapped_column(String(50), nullable=True)
+    birthdate: Mapped[date] = mapped_column(Date, nullable=True)
 
     profile: Mapped["Profiles"] = relationship(
         back_populates="user"
     )
 
     def __repr__(self) -> str:
-        return f"Users(id={self.id!r}, username={self.username!r}, email={self.email!r}), country={self.country!r}"
+        state = inspect(self)
+        representation = (
+            "Users("
+            f"id={self.id!r} "
+            f"username={self.username!r} "
+            f"email={self.email!r} "
+            f"country={self.country!r}"
+        )
+
+        if "profile" not in state.unloaded:
+            representation += " " + self.profile.__repr__()
+        
+        representation += ")"
+        return representation
