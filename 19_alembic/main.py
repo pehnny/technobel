@@ -2,7 +2,7 @@ from database import session
 from seed import seed
 from sqlalchemy.exc import IntegrityError
 import traceback
-from controler import create_user, create_game, buy_game, play_game
+from controler import create_user, create_game, buy_game, play_game, review_game
 
 def main() -> None:
     with session() as s:
@@ -40,6 +40,12 @@ def main() -> None:
         hours = 200
         user_game = play_game(s, username, title, hours)
         print(username)
+
+        # review game
+        comment = "better than lol"
+        rating = 4
+        review = review_game(s, username, title, comment, rating)
+        print(review)
     
 if __name__ == "__main__":
     main()
