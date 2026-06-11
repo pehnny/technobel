@@ -72,6 +72,7 @@ def init(session: Session) -> bool:
         Profiles(user=users[9], bio="Strategy and simulation fan",   country="France",      birthdate=date(2001, 5, 3),   avatar_url="https://avatar.com/julia.png"),
     ]
     session.add_all(profiles)
+    session.flush()
 
     # 30 purchases — 3 per user
     user_games = [
@@ -117,6 +118,7 @@ def init(session: Session) -> bool:
         UserGames(user=users[9], game=games[16], purchase_date=date(2022, 12, 25), hours_played=130),
     ]
     session.add_all(user_games)
+    session.flush()
 
     # 15 reviews — only for games the user owns
     reviews = [
@@ -137,5 +139,5 @@ def init(session: Session) -> bool:
         Reviews(user=users[8], game=games[6],  rating=4, comment="Great predecessor to Witcher 3."),
     ]
     session.add_all(reviews)
-    session.commit()
+    session.flush()
     return True

@@ -13,8 +13,8 @@ class Games(Base):
     release_date: Mapped[date]
     age_rating: Mapped[AgeRating]
     publisher_id: Mapped[int] = mapped_column(
-        ForeignKey("publishers.id"),
-        nullable=False
+        ForeignKey("publishers.id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
     )
 
     publisher: Mapped["Publishers"] = relationship(back_populates="games")

@@ -9,7 +9,7 @@ class Profiles(Base):
 
     id: Mapped[int] = mapped_column(Identity(always=True), primary_key=True)
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id"),
+        ForeignKey("users.id", onupdate="CASCADE", ondelete="CASCADE"),
         unique=True
     )
     bio: Mapped[Optional[str]]

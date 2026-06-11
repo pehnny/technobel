@@ -7,12 +7,12 @@ class UserGames(Base):
     __tablename__ = "user_games"
 
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id"),
+        ForeignKey("users.id", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,
         primary_key=True
     )
     game_id: Mapped[int] = mapped_column(
-        ForeignKey("games.id"),
+        ForeignKey("games.id", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,
         primary_key=True
     )

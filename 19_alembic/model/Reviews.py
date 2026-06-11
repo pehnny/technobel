@@ -10,11 +10,11 @@ class Reviews(Base):
 
     id: Mapped[int] = mapped_column(Identity(always=True), primary_key=True)
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id"),
+        ForeignKey("users.id", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False
     )
     game_id: Mapped[int] = mapped_column(
-        ForeignKey("games.id"),
+        ForeignKey("games.id", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,
     )
     rating: Mapped[int] = mapped_column(CheckConstraint("rating >= 1 and rating <= 5"))
