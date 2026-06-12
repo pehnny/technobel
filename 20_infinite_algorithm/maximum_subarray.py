@@ -6,11 +6,10 @@ class Solution(object):
         :rtype: int
         """
         sums = []
-        for i in range(len(nums)-k):
-            high = i+k+1
+        for i in range(len(nums)-k+1):
+            high = i+k
             subnums = nums[i:high]
-            subnums_count = [subnums.count(value) for value in subnums]
-            duplicate = max(subnums_count)
+            duplicate = max([subnums.count(value) for value in subnums])
             if duplicate == 1:
                 sums.append(sum(subnums))
         if len(sums) == 0:
