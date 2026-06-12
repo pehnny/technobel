@@ -390,7 +390,7 @@ Cela permet d’obtenir un historique plus propre et linéaire.
 * réécrit les commits
 * plus dangereux si mal utilisé
 
-Éviter les rebases sur des branches partagées.
+Éviter les rebases sur des branches partagées. Rebase est un merge qui réécrit l'historique, c'est donc un peu risqué en terme de mauvaise manipulation.
 
 ---
 
@@ -400,7 +400,7 @@ Cela permet d’obtenir un historique plus propre et linéaire.
 git cherry-pick SHA_DU_COMMIT
 ```
 
-Permet de copier un commit précis sur une autre branche sans merge toute la branche.
+Permet de copier un commit précis sur une autre branche sans merge toute la branche. C'est un "merge" ciblé depuis un commit précis plutôt que d'une branche complète.
 
 Très utile pour :
 
