@@ -71,6 +71,9 @@ class Solution(object):
         # The solution works pretty fast but does not satisfy the second condition.
         # How can I match O(n) without division ? How not to recompute
         # the whole product ? Is it even possible ?
+        # It's a called a prefix-suffix pattern !
+        # The idea is to accumulate de product (sum) from left
+        # then from right. The complexity is O(n) but the real computation is 2n.
 
         # O(n²)
         # solution = []
@@ -119,4 +122,19 @@ class Solution(object):
             else:
                 value = prefix[i-1] * suffix[i+1]
                 solution.append(value)
+
+        # # O(n) without division and with O(1) space
+        # curr_left_prod = 1
+        # curr_right_prod = 1
+        # answer = [1] * len(nums)
+       
+        # for i in range(len(nums)):
+        #     answer[i] = curr_left_prod
+        #     curr_left_prod = curr_left_prod * nums[i]
+ 
+        # for i in range(len(nums)-1, -1, -1):
+        #     answer[i] *= curr_right_prod
+        #     curr_right_prod = curr_right_prod * nums[i]
+ 
+        # return answer
         return solution
