@@ -138,3 +138,21 @@ class Solution(object):
  
         # return answer
         return solution
+    
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        intervals.sort(key=lambda x:x[0])
+        solution = [intervals[0]]
+        for interval in intervals:
+            start, end = interval
+            previous = solution[-1]
+            p_start, p_end = previous
+            if start > p_end:
+                solution.append(interval)
+            elif end > p_end:
+                solution[-1][1] = end
+        return solution
