@@ -20,8 +20,7 @@ def quick_sort[T: Comparable](arr: list[T]) -> list[T]:
     if len(arr) < 2 :
         return arr
     
-    rng = random.randint(0, len(arr)-1)
-    pivot = arr[rng]
+    pivot = arr[-1]
     smaller = [value for value in arr[1:] if value <= pivot]
     bigger = [value for value in arr[1:] if value > pivot]
     return quick_sort(smaller) + [pivot] + quick_sort(bigger)

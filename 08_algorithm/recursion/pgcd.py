@@ -1,4 +1,3 @@
-
 def pgcd(a: int, b: int) -> int:
     """Use a divide and conquer strategy
 

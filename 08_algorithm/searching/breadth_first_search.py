@@ -54,7 +54,7 @@ class Node[T]:
     value: T
     children: Optional[list[Node[T]]]
 
-def breadth_search[T](
+def breadth_first_tree_search[T](
         node: Node[T], 
         target: T, 
     ) -> bool:

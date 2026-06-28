@@ -4,7 +4,7 @@ class Comparable(Protocol):
     def __lt__(self, other: Self, /) -> bool: ...
     def __gt__(self, other: Self, /) -> bool: ...
 
-def binary_search[T: Comparable](arr: list[T], item: T) -> Optional[int]:
+def binary_search[T: Comparable](arr: list[T], target: T) -> Optional[int]:
     """The point of binary_search is that it makes looking
     for an item `O(log(n))` instead of `O(n)`.
 
@@ -17,9 +17,9 @@ def binary_search[T: Comparable](arr: list[T], item: T) -> Optional[int]:
         mid = (low + high) // 2
         guess = arr[mid]
 
-        if guess == item:
+        if guess == target:
             return mid
-        elif guess > item:
+        elif guess > target:
             high = mid - 1
         else:
             low = mid + 1
