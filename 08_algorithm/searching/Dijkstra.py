@@ -1,7 +1,7 @@
 import heapq
 
 def path_finder(area: str) -> int:
-    grid = [row for row in area.split("\n")]
+    grid = [col for col in area.split("\n")]
     grid_cost = [[float("inf") for _ in range(len(grid))] for _ in range(len(grid))]
     grid_cost[0][0] = 0
     
