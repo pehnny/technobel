@@ -15,18 +15,34 @@ resultat attendu : 2
 """
 
 
-def subarray_sum(nums: list[int], k: int) -> int:
+def subarray_sum(nums: list[int], target: int) -> int:
     solution = 0
     state = 0
     for left, num in enumerate(nums):
         state = num
-        if state == k:
+        if state == target:
             solution += 1
         for other in nums[left+1:]:
             state += other
-            if state == k:
+            if state == target:
                 solution += 1
     return solution
+
+    count = 0
+    prefix_sum = 0
+    seen = {0: 1}  # avant tout élément, la somme 0 existe une fois
+
+    for num in nums:
+        prefix_sum += num
+        complement = prefix_sum - target
+        if complement in seen:
+            count += seen[complement]
+        if prefix_sum in seen:
+            seen[prefix_sum] += 1
+        else:
+            seen[prefix_sum] = 1
+
+    return count
 
 def check(name: str, result: int, expected: int) -> bool:
     if result == expected:
